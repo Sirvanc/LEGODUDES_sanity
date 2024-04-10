@@ -11,7 +11,7 @@ export default defineConfig({
 
   //Hvis du har hentet dette prosjektet fra GitHub, må du endre
   //projectId til din egen prosjektid fra sanity.io/manage
-  projectId: 'tj8klx6q',
+  projectId: 'xbpab6cz',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
