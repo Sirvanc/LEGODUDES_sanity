@@ -1,6 +1,6 @@
-import {createClient} from '@sanity/client'
+import {defineCliConfig} from 'sanity/cli'
 
-export const client = createClient({
+export default defineCliConfig({
   api: {
     projectId: 'v652wzsh',
     dataset: 'production'
