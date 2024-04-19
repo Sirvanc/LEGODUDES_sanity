@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
 import {Link, useParams} from 'react-router-dom'
-import { fetchProductBySlug } from '../../sanity/services/productServices'
+import { fetchProductBySlug, updateReview } from '../../sanity/services/productServices'
 
 //Komponent for å hente et bestemt produkt basert på produktets slug i Sanity
+//Her setter vi også ting inn i Sanity, mer info: https://webtricks.blog/oppdatere-et-array-felt-i-en-innholdstype-i-sanity-fra-et-react-grensesnitt/
 export default function ProductPage() {
     //States for å lagre skjemainformasjon
     const [reviewer, setReviewer] = useState("")
     const [comment, setComment] = useState("")
     const [rating, setRating] = useState(0)
+    const [formMessage, setFormMessage] = useState("")
 
     //handeChange-funksjoner for felter
     const handleReviewerChange = (e) => {
@@ -21,6 +23,30 @@ export default function ProductPage() {
     const handleRatingChange = (e) => {
         e.preventDefault()
         setRating(e.target.value)
+    }
+    //handleSubmit-funksjon for når en bruker sender en anmeldelse
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        //Vi må kontrollere om rating er 0 (standard verdi i state). Er den det, må brukeren fylle inn en vurdering.
+        if(rating === 0) {
+            setFormMessage("Du må sette en vurdering.")
+        } else {
+            //Ellers er en vurdering satt, og vi kan kjøre servicen som forsøker å sette vurderingen inn i Sanity
+            const result = await updateReview(product._id, reviewer, comment, rating)
+            //Hvis Sanity returnerer et suksessfullt resultat av lagringen:
+            if(result == "Success") {
+                //Sett en melding som skal vises i skjemaet
+                setFormMessage("Din anmeldelse er registrert!")
+                //Midlertidig oppdater review-arrayen i product-staten mens vi venter på at 
+                //sanity er ferdig med å lagre anmeldelsen og kan sende den tilbake til nettapplikasjonen
+                product.reviews.push({reviewer: reviewer, comment: comment, rating: rating})
+            } else {
+                setFormMessage(result)
+            }
+            console.log(result)
+        }
+        
     }
 
 
@@ -67,7 +93,8 @@ export default function ProductPage() {
                         </p>
                         <p>
                             <label htmlFor="rating">Vurdering:</label><br />
-                            <select name="rating" id="rating" onChange={handleRatingChange}>
+                            <select name="rating" id="rating" required onChange={handleRatingChange}>
+                                <option value="">Velg din vurdering</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -75,10 +102,11 @@ export default function ProductPage() {
                                 <option value="5">5</option>
                             </select>
                         </p>
-                        <p><button>Send anmeldelse</button></p>
+                        <p id="formmessage">{formMessage}</p>
+                        <p><button onClick={handleSubmit}>Send anmeldelse</button></p>
                     </form>
                     {
-                        product?.reviews.map((r, i) => <p key={i}>
+                        product?.reviews?.map((r, i) => <p key={i}>
                             <strong>{r.reviewer}</strong><br />
                             {r.comment}<br />
                             Vurdering: {r.rating}

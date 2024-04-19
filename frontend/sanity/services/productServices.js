@@ -19,6 +19,7 @@ export async function fetchAllProducts() {
 //Funksjon som henter et produkt basert på en slug:
 export async function fetchProductBySlug(slug) {
     const data = await client.fetch(`*[_type == "products" && producturl.current == $slug]{
+        _id,
         productname,
         description,
         "categoryname": category->categorytitle,
@@ -32,6 +33,7 @@ export async function fetchProductBySlug(slug) {
 }
 
 //Funksjon som tar imot informasjon og oppdaterer reviews-arrayen i et produkt
+//Mer informasjon/tutorial: https://webtricks.blog/oppdatere-et-array-felt-i-en-innholdstype-i-sanity-fra-et-react-grensesnitt/
 export async function updateReview(productid,reviewer,comment,rating) {
     const result = await writeClient
     .patch(productid).setIfMissing({reviews: []})
@@ -39,4 +41,6 @@ export async function updateReview(productid,reviewer,comment,rating) {
     .commit({autoGenerateArrayKeys: true})
     .then(() => {return "Success"})
     .catch((error) => {return "Error: " + error.message})
+
+    return result
 }
