@@ -5,9 +5,13 @@ import {schemaTypes} from './schemaTypes'
 
 export default defineConfig({
   name: 'default',
-  title: 'Legoduds',
+  //Hvis du har hentet dette prosjektet fra GitHub, må du endre
+  //projectId til ditt eget prosjektnavn fra sanity.io/manage
+  title: 'legodudes',
 
-  projectId: 'v652wzsh',
+  //Hvis du har hentet dette prosjektet fra GitHub, må du endre
+  //projectId til din egen prosjektid fra sanity.io/manage
+  projectId: 'xbpab6cz',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
