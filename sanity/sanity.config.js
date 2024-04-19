@@ -7,11 +7,11 @@ export default defineConfig({
   name: 'default',
   //Hvis du har hentet dette prosjektet fra GitHub, må du endre
   //projectId til ditt eget prosjektnavn fra sanity.io/manage
-  title: 'legodudes',
+  title: 'Legodudes',
 
   //Hvis du har hentet dette prosjektet fra GitHub, må du endre
   //projectId til din egen prosjektid fra sanity.io/manage
-  projectId: 'xbpab6cz',
+  projectId: 'v652wzsh',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],

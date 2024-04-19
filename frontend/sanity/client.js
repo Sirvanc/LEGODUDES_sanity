@@ -3,18 +3,17 @@ import {createClient} from '@sanity/client'
 export const client = createClient({
   //Hvis du har hentet dette prosjektet fra GitHub, må du endre
   //projectId til din egen prosjektid fra sanity.io/manage
-  projectId: "xbpab6cz",
+  projectId: "v652wzsh",
   dataset: "production",
   useCdn: true,
   apiVersion: "2022-03-07"
 })
 
-//skK9yr9KcybuwmlFTVqtd2MJyCGhghGpwhUt79r0DbQ9wk3sB36CsbrIojJkhwrXgBjyfAXqnjxMSOWxnCANYM49sOEV9MHUyyI2bpLe11NOtLuuNpdnqVCi3Xeozn7Bl0pKwJwQRJnlMXVr1e8oXjFa4abc3uyEvQ6AqHKpe1KzNp5mm55w
-
+//skpqBdV3vPbZmhtp00euoGre6FW5G5UQ5NBNxdtHoN6Nnb9zBjCvwuxAhjVZxknfKpZxLEbgu4zoeJIMoGbqd3dkLErRFBXfiaEga0J1RyO6E3pWW7soRX3tArg6OrtIOsSaWv5aWEOsTVCJWB6vhy80l2NTHuYBhiHqT9Fw3THZPA2mqvWR
 export const writeClient = createClient({
-  projectId: "xbpab6cz",
+  projectId: "v652wzsh",
   dataset: "production",
   useCdn: false,
   apiVersion: "2022-03-07",
-  token: "skK9yr9KcybuwmlFTVqtd2MJyCGhghGpwhUt79r0DbQ9wk3sB36CsbrIojJkhwrXgBjyfAXqnjxMSOWxnCANYM49sOEV9MHUyyI2bpLe11NOtLuuNpdnqVCi3Xeozn7Bl0pKwJwQRJnlMXVr1e8oXjFa4abc3uyEvQ6AqHKpe1KzNp5mm55w"
+  token: "skpqBdV3vPbZmhtp00euoGre6FW5G5UQ5NBNxdtHoN6Nnb9zBjCvwuxAhjVZxknfKpZxLEbgu4zoeJIMoGbqd3dkLErRFBXfiaEga0J1RyO6E3pWW7soRX3tArg6OrtIOsSaWv5aWEOsTVCJWB6vhy80l2NTHuYBhiHqT9Fw3THZPA2mqvWR"
 })
